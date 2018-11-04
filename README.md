@@ -6,6 +6,8 @@ A realtime progress bar for Slack
 
 ![screencap][screencap]
 
+![screencap-full][screencap-full]
+
 ## Installing
 
 ```bash
@@ -48,4 +50,17 @@ pbar.pos = 100
 pbar.log("Step 2 complete")
 ```
 
-[screencap]: http://i.imgur.com/103z4Io.gif "slack-progress"
+The bar can be also rendered always with full width:
+
+```python
+sp = SlackProgress('SLACK_TOKEN', 'CHANNEL_NAME', full_width=True)
+```
+
+The bar characters (fill and empty) can also be customized:
+```python
+sp = SlackProgress('SLACK_TOKEN', 'CHANNEL_NAME', full_width=True, fill_char='X', empty_char='_')
+```
+
+
+[screencap]: https://i.imgur.com/cDkKIYW.gif "slack-progress"
+[screencap-full]: https://i.imgur.com/UmGFHdI.gif "slack-progress-full"
