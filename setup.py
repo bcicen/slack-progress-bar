@@ -16,5 +16,6 @@ setup(
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 3',
     ),
-    keywords='slack chatops devops'
+    keywords='slack chatops devops',
+    extras_require={'test': ['pytest', 'responses', ]}
 )

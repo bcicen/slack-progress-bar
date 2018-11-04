@@ -1,13 +1,21 @@
+# -*- coding: utf-8 -*-
+
 import time
 
 from slacker import Slacker
 
 
 class SlackProgress(object):
-    def __init__(self, token, channel, suffix='%'):
+    def __init__(
+            self, token, channel, suffix='%', full_width=False,
+            fill_char='⬛', empty_char='⬜',
+    ):
         self.suffix = suffix
         self.channel = channel
         self.slack = Slacker(token)
+        self.full_width = full_width
+        self.fill_char = fill_char
+        self.empty_char = empty_char
 
     def new(self, total=100):
         """
@@ -38,8 +46,12 @@ class SlackProgress(object):
         self.slack.chat.update(chan, msg_ts, content)
 
     def _makebar(self, pos):
-        bar = (round(pos / 5) * chr(9608))
-        return '{} {}{}'.format(bar, pos, self.suffix)
+        filled = int(round(pos / 5))
+        bar = filled * self.fill_char
+        empty = ''
+        if self.full_width:
+            empty  = (int(100 / 5) - filled) * self.empty_char
+        return '{}{} {}{}'.format(bar, empty, pos, self.suffix)
 
 
 class ProgressBar(object):
